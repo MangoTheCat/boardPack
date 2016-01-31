@@ -11,4 +11,5 @@ shinyUI(navbarPage(
   ,setupInput
   ,tabPanel("Add commentary", uiOutput("inputs"))
   ,tabPanel("Live preview", uiOutput("previews"))
+  ,tabPanel("Make PDF", reportGenUI("generate"))
 ))

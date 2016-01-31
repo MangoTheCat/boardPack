@@ -9,7 +9,7 @@ params:
 output: 
   beamer_presentation: 
     colortheme: wolverine
+    fig_height: 4
     highlight: tango
     theme: Copenhagen
-    toc: yes
 ---

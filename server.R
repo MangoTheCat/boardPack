@@ -18,12 +18,21 @@ shinyServer(function(input, output, session) {
     tagList(lapply(modsToRun()$alias, previewUI))
   })
   
+  
+#   keyDatas<-lapply(1:nrow(modsToRun()), function(i) {
+#       reactive(callModule(keyData
+#                  ,id=modsToRun()$alias[i]
+#                  ,type=modsToRun()$alias[i]
+#                  ,period()))
+#     })
+  
   modules <- list(
     callModule(keyData, "top", type = "top",period()),
     callModule(keyData, "ours", type = "ours",period()),
     callModule(keyData, "downloads", type = "downloads",period()),
     callModule(preview, "top", type = "top",period()),
     callModule(preview, "ours", type = "ours",period()),
-    callModule(preview, "downloads", type = "downloads",period())
+    callModule(preview, "downloads", type = "downloads",period()),
+    callModule(reportGen, "generate",period())
   )
 })
