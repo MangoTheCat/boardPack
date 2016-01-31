@@ -1,0 +1,13 @@
+---
+title: "`r params$title`"
+author: "`r params$author`"
+date: "`r params$date`"
+params:
+  title: Board Report
+  author: Steph Locke
+  date: 31 January 2016
+output: 
+  beamer_presentation: 
+    colortheme: wolverine
+    theme: Copenhagen
+---
