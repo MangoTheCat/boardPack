@@ -2,7 +2,6 @@ previewUI <- function(id) {
   ns <- NS(id)
   title <- sections$section[sections$alias == id]
   tabPanel(title
-           ,h2(title)
            ,htmlOutput(ns("knitDoc")))
 }
 
@@ -11,7 +10,9 @@ preview <- function(input,output,session
                       ,period) {
   contents <- callModule(keyData, id = type, type, period)
   
-  boardpreview <-  reactive(readr::read_file(
+  boardpreview <-  reactive({
+    title <- sections$section[sections$alias == type]
+    readr::read_file(
     rmarkdown::render(
       input = "boardfragment.Rmd"
       ,output_format = rmarkdown::html_fragment()
@@ -20,9 +21,10 @@ preview <- function(input,output,session
         comment = input$commentary
         ,period = period
         ,type = type
+        ,title = title
       )
     )
-  ))
+  )})
   
   output$knitDoc <- renderUI({
     HTML(boardpreview())
