@@ -1,6 +1,6 @@
 myTheme <- shinythemes::shinytheme("United")
 myTitle <- "Board Pack"
-
+myOutputFileName<-paste0("MyBoardPack",format(Sys.Date(),"%Y%m%d"),".pdf")
 sections <- data.table(
   section = c("R downloads"
               ,"Popular packages"
