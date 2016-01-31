@@ -3,10 +3,17 @@ params:
   comment: blah
   period: 2015-12-01:2015-12:31
   type: top
+  title: Top packages
 ---
+
 
 ```{r echo=FALSE, results='asis'}
 source("global.R")
+cat(paste0("# ",params$title))
+```
+
+
+```{r echo=FALSE, results='asis'}
 cat(params$comment)
 ```
 
