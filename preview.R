@@ -5,6 +5,7 @@ previewUI <- function(id) {
            ,h2(title)
            ,htmlOutput(ns("knitDoc")))
 }
+
 preview <- function(input,output,session
                       ,type = c("downloads", "ours", "top")
                       ,period) {
