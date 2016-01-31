@@ -1,0 +1,11 @@
+---
+title: "A typical board report"
+author: "Steph Locke"
+date: "`r Sys.Date()`"
+output: 
+  beamer_presentation: 
+    colortheme: wolverine
+    highlight: tango
+    theme: Copenhagen
+---
+

@@ -1,0 +1,16 @@
+---
+params:
+  comment: blah
+  period: 2015-12-01:2015-12:31
+  type: top
+---
+
+```{r echo=FALSE, results='asis'}
+source("global.R")
+cat(params$comment)
+```
+
+```{r echo=FALSE}
+makeChart(getCRANLOG(type=params$type,period=params$period)
+          ,type=params$type)
+```
