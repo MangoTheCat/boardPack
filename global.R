@@ -60,7 +60,7 @@ makeCRANLOG <-
 #' Return a data.table of log results
 #'
 #' @inheritParams makeCRANLOG
-getCRANLOG <-
+getCRANLOG.base <-
   function(type = c("downloads", "ours", "top"), period, count = 30) {
     simp <- jsonlite::fromJSON(makeCRANLOG(type,period,count)
                                , simplifyVector = TRUE)
@@ -72,6 +72,7 @@ getCRANLOG <-
     }
     if (type == "downloads") {
       tbl <- data.table::data.table(simp$downloads[[1]])
+      tbl <- tbl[os!="NA",]
     }
     if (type == "ours") {
       tbl <- data.table::rbindlist(simp[["downloads"]])
@@ -82,6 +83,10 @@ getCRANLOG <-
     return(tbl)
   }
 
+getCRANLOG<-memoise::memoise(getCRANLOG.base)
+
+#' Generate various charts
+#'
 makeChart <- function(data, type = c("downloads", "ours", "top")) {
   if (type == "top") {
     p <- ggplot(data,aes(x = package,y = downloads)) +
@@ -106,3 +111,24 @@ makeChart <- function(data, type = c("downloads", "ours", "top")) {
   
   return(p)
 }
+
+#' Custom HTML fragment renderer
+#'
+#' @param type  API area
+#' @param param List of parameters to pass to fragment
+#' @param lookup Name of lookup object
+#'
+#' @return markdown
+customMDRender.base<-function(type, param, output_format, lookup=sections){
+  title <- lookup$section[lookup$alias == type]
+  out<-tempfile(fileext = ".md")
+    rmarkdown::render(
+      input = "boardfragment.Rmd"
+      ,output_file=out
+      ,output_format = output_format
+      ,params = param
+    )
+  return(out)
+}
+
+customMDRender<-memoise::memoise(customMDRender.base)
