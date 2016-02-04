@@ -16,6 +16,7 @@ companies <- data.table(
   ,active = rep(1,3)
 )
 
+source("prereqs.R")
 source("keyData.R")
 source("preview.R")
 source("reportGen.R")
