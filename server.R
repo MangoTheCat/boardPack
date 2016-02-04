@@ -19,13 +19,6 @@ shinyServer(function(input, output, session) {
   })
   
   
-#   keyDatas<-lapply(1:nrow(modsToRun()), function(i) {
-#       reactive(callModule(keyData
-#                  ,id=modsToRun()$alias[i]
-#                  ,type=modsToRun()$alias[i]
-#                  ,period()))
-#     })
-  
   modules <- list(
     callModule(keyData, "top", type = "top",period()),
     callModule(keyData, "ours", type = "ours",period()),
