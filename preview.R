@@ -13,17 +13,14 @@ preview <- function(input,output,session
   boardpreview <-  reactive({
     title <- sections$section[sections$alias == type]
     readr::read_file(
-    rmarkdown::render(
-      input = "boardfragment.Rmd"
-      ,output_format = rmarkdown::html_fragment()
-      ,output_file = "boardfragment.html"
-      ,params = list(
-        comment = input$commentary
-        ,period = period
-        ,type = type
-        ,title = title
-      )
-    )
+      customMDRender(type
+                     ,list(comment = input$commentary
+                               ,period = period
+                               ,type = type
+                               ,title = title
+                             )
+                     ,rmarkdown::html_fragment()
+                     )
   )})
   
   output$knitDoc <- renderUI({
