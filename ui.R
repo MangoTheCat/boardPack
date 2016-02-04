@@ -5,11 +5,13 @@ library(data.table)
 
 source("config.R")
 
-shinyUI(navbarPage(
-  theme = myTheme
-  ,title = myTitle
-  ,setupInput
-  ,tabPanel("Add commentary", uiOutput("inputs"))
-  ,tabPanel("Live preview", uiOutput("previews"))
-  ,tabPanel("Make PDF", reportGenUI("generate"))
-))
+shinyUI(
+  navbarPage(
+    theme = myTheme
+    , title = myTitle
+    , setupInput
+    , tabPanel("Add commentary", uiOutput("inputs"))
+    , tabPanel("Live preview", uiOutput("previews"))
+    , tabPanel("Make PDF", reportGenUI("generate"))
+  )
+)

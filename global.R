@@ -52,7 +52,7 @@ makeCRANLOG <-
                   , "simplegraph,networkD3,franc,mangoTraining"
                   , sep = "/")
     top <- paste("top", "last-month", count, sep = "/")
-    
+
     link <- paste0(baselink, get(type))
     return(link)
   }
@@ -72,18 +72,18 @@ getCRANLOG.base <-
     }
     if (type == "downloads") {
       tbl <- data.table::data.table(simp$downloads[[1]])
-      tbl <- tbl[os!="NA",]
+      tbl <- tbl[os != "NA",]
     }
     if (type == "ours") {
       tbl <- data.table::rbindlist(simp[["downloads"]])
       tbl[,package:= rep(simp[["package"]]
                           , times = sapply(simp[["downloads"]],nrow))]
     }
-    
+
     return(tbl)
   }
 
-getCRANLOG<-memoise::memoise(getCRANLOG.base)
+getCRANLOG <- memoise::memoise(getCRANLOG.base)
 
 #' Generate various charts
 #'
@@ -99,16 +99,16 @@ makeChart <- function(data, type = c("downloads", "ours", "top")) {
       geom_bar(stat = "identity") +
       theme_minimal() +
       coord_flip() +
-      facet_wrap( ~ os)
+      facet_wrap(~ os)
   }
   if (type == "ours") {
     p <- ggplot(data,aes(x = day,y = downloads)) +
       geom_bar(stat = "identity") +
       theme_minimal() +
       coord_flip() +
-      facet_wrap( ~ package)
+      facet_wrap(~ package)
   }
-  
+
   return(p)
 }
 
@@ -119,16 +119,16 @@ makeChart <- function(data, type = c("downloads", "ours", "top")) {
 #' @param lookup Name of lookup object
 #'
 #' @return markdown
-customMDRender.base<-function(type, param, output_format, lookup=sections){
-  title <- lookup$section[lookup$alias == type]
-  out<-tempfile(fileext = ".md")
+customMDRender.base <-
+  function(type, param, output_format, lookup = sections) {
+    out <- tempfile(fileext = ".md")
     rmarkdown::render(
       input = "boardfragment.Rmd"
-      ,output_file=out
+      ,output_file = out
       ,output_format = output_format
       ,params = param
     )
-  return(out)
-}
+    return(out)
+  }
 
-customMDRender<-memoise::memoise(customMDRender.base)
+customMDRender <- memoise::memoise(customMDRender.base)
