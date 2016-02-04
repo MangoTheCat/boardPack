@@ -17,7 +17,7 @@ cat(paste0("# ",params$title))
 cat(params$comment)
 ```
 
-```{r echo=FALSE}
+```{r chart, echo=FALSE}
 makeChart(getCRANLOG(type=params$type,period=params$period)
           ,type=params$type)
 ```
